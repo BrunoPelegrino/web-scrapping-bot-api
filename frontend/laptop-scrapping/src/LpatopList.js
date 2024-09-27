@@ -17,10 +17,16 @@ function LaptopList() {
       } finally {
         setLoading(false); 
       }
+      ;
     };
-
+    
     fetchLaptops();
-  }, []);
+    const refresh = setInterval(() => {
+        fetchLaptops();
+      }, 10800000);
+
+      return () => clearInterval(refresh)
+    }, []);
 
   if (loading) {
     return <p>Carregando laptops...</p>;
